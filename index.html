@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EF Musik-Quiz zu Metrum, Takt und Rhythmus">
+  <title>Rhythmus-Check EF</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="eyebrow">MUSIK · EF</div>
+      <h1>Rhythmus-Check</h1>
+      <p>Metrum, Takt, Rhythmus, Notenwerte, Triole, Synkope, Auftakt und Punktierung.</p>
+    </header>
+
+    <section id="startScreen" class="card">
+      <h2>Bereit?</h2>
+      <p>Du bekommst 12 Fragen in zufälliger Reihenfolge. Am Ende siehst du deine Punktzahl und eine Themenauswertung.</p>
+      <label for="studentName">Name oder Kürzel <span>(optional)</span></label>
+      <input id="studentName" maxlength="40" autocomplete="off" placeholder="z. B. Mia / EF1-07">
+      <div class="privacy-note">Gespeichert werden nur das eingegebene Kürzel, Ergebnis, Themenwerte und Zeitpunkt. Ohne Supabase-Konfiguration läuft der Test lokal weiter.</div>
+      <button id="startBtn" class="primary">Test starten</button>
+    </section>
+
+    <section id="quizScreen" class="card hidden" aria-live="polite">
+      <div class="topline">
+        <span id="counter">Frage 1 / 12</span>
+        <span id="scoreLive">0 Punkte</span>
+      </div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div id="topicBadge" class="badge"></div>
+      <h2 id="questionText"></h2>
+      <div id="answers" class="answers"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      <button id="nextBtn" class="primary hidden">Nächste Frage</button>
+    </section>
+
+    <section id="resultScreen" class="card hidden">
+      <div class="result-ring" id="resultRing"><strong id="percent">0%</strong><span>erreicht</span></div>
+      <h2 id="resultTitle">Auswertung</h2>
+      <p id="resultText"></p>
+      <div id="topicResults" class="topic-results"></div>
+      <p id="saveStatus" class="save-status"></p>
+      <div class="button-row">
+        <button id="restartBtn" class="primary">Nochmal versuchen</button>
+      </div>
+    </section>
+
+    <footer>EF Musik · Übungstest · Keine personenbezogenen Daten erforderlich</footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
