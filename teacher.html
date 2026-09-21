@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Lehrerbereich · Rhythmus-Check EF</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="shell">
+  <header class="hero"><div class="eyebrow">MUSIK · EF</div><h1>Lehrerbereich</h1><p>Geschützte Ergebnisübersicht des Rhythmus-Checks.</p></header>
+
+  <section id="loginCard" class="card">
+    <h2>Anmelden</h2>
+    <p class="teacher-note">Die Anmeldung läuft über Supabase Auth. Das Passwort wird nicht im GitHub-Repository gespeichert.</p>
+    <label for="email">E-Mail</label><input id="email" type="email" autocomplete="username" placeholder="lehrer@schule.de">
+    <label for="password">Passwort</label><input id="password" type="password" autocomplete="current-password" placeholder="Passwort">
+    <p id="loginError" class="login-error"></p>
+    <button id="loginBtn" class="primary">Anmelden</button>
+    <a class="teacher-link" href="index.html">← Zurück zum Quiz</a>
+  </section>
+
+  <section id="dashboard" class="card hidden">
+    <div class="teacher-toolbar"><div><div class="badge">Nur Lehrkraft</div><h2>Ergebnisse</h2></div><button id="logoutBtn" class="secondary danger">Abmelden</button></div>
+    <div class="stats-grid"><div class="stat"><strong id="attempts">–</strong><span>Testdurchgänge</span></div><div class="stat"><strong id="average">–</strong><span>Ø Ergebnis</span></div><div class="stat"><strong id="latest">–</strong><span>Letzter Eintrag</span></div></div>
+    <div class="teacher-toolbar"><span id="loadStatus" class="teacher-note"></span><button id="refreshBtn" class="secondary">Aktualisieren</button></div>
+    <div class="table-wrap"><table><thead><tr><th>Zeitpunkt</th><th>Name/Kürzel</th><th>Punkte</th><th>Prozent</th><th>Themen</th></tr></thead><tbody id="resultsBody"></tbody></table></div>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="teacher.js"></script>
+</body>
+</html>

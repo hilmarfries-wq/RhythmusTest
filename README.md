@@ -47,3 +47,23 @@ Das Namensfeld ist bewusst optional und kann auch nur mit einem Kürzel genutzt 
 ## Anpassungen
 
 Die Fragen stehen in `script.js` im Array `questions`. Dort kannst du weitere Fragen ergänzen. Jede Frage hat ein Thema (`topic`), die Frage (`q`), vier Antworten (`a`), den Index der richtigen Antwort (`c`, beginnend bei 0) und eine Erklärung (`e`).
+
+## Lehrerbereich mit Passwort
+
+Der Lehrerbereich liegt unter `teacher.html`. Er verwendet **Supabase Auth (E-Mail + Passwort)**; das Passwort steht also nicht im GitHub-Code.
+
+1. Führe die aktuelle `supabase.sql` im Supabase SQL Editor aus.
+2. Öffne in Supabase **Authentication → Users** und lege dein Lehrerkonto mit E-Mail und Passwort an.
+3. Kopiere die UUID des angelegten Users.
+4. Führe im SQL Editor aus (UUID ersetzen):
+
+```sql
+insert into public.teacher_users (user_id)
+values ('HIER-DIE-USER-UUID-EINTRAGEN')
+on conflict (user_id) do nothing;
+```
+
+5. Trage in `teacher.js` dieselbe `SUPABASE_URL` und denselben Publishable/Anon Key wie in `script.js` ein.
+6. Lass öffentliche Registrierung deaktiviert, wenn ausschließlich von dir angelegte Lehrerkonten verwendet werden sollen.
+
+Der Lehrerbereich zeigt bis zu 500 aktuelle Testdurchgänge, Durchschnittswert, letzten Eintrag und die Themenauswertung. Die Datenbank-Regel (RLS) prüft serverseitig, ob die angemeldete User-ID in `teacher_users` steht. Ein bloßes Aufrufen von `teacher.html` reicht daher nicht zum Lesen der Ergebnisse.
