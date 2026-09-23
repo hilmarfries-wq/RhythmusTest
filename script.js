@@ -1,8 +1,8 @@
 // ===== Supabase-Konfiguration =====
 // Trage hier NUR deine Project URL und deinen PUBLISHABLE/ANON Key ein.
 // Niemals den service_role Key in GitHub oder Browser-Code eintragen.
-const SUPABASE_URL = "DEINE_SUPABASE_URL";
-const SUPABASE_PUBLISHABLE_KEY = "DEIN_SUPABASE_PUBLISHABLE_KEY";
+const SUPABASE_URL = "https://owemgypenebvynskadgi.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_iL0iy85bWf-vJmWkrjoTqg_x8BjFzG7";
 
 const dbEnabled = SUPABASE_URL.startsWith("https://") && !SUPABASE_PUBLISHABLE_KEY.startsWith("DEIN_");
 const db = dbEnabled ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
