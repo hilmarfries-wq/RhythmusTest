@@ -67,11 +67,30 @@ async function finish(){
   $("resultTitle").textContent=pct>=80?"Sehr sicher":pct>=60?"Gute Grundlage":"Weiter üben";
   $("resultText").textContent=`Du hast ${score} von ${quiz.length} Fragen richtig beantwortet.`;
   $("topicResults").innerHTML=Object.entries(topicStats).sort().map(([t,s])=>`<div class="topic-row"><span>${t}</span><span>${s.right}/${s.total}</span></div>`).join("");
-  $("saveStatus").textContent=dbEnabled?"Ergebnis wird gespeichert …":"Lokaler Modus: Supabase ist noch nicht eingerichtet.";
-  if(dbEnabled){
-    const name=$("studentName").value.trim().slice(0,40)||"anonym";
-    const {error}=await db.from("quiz_results").insert({student_label:name,score,total:quiz.length,percentage:pct,topic_results:topicStats});
-    $("saveStatus").textContent=error?"Das Ergebnis konnte nicht gespeichert werden. Der Test selbst ist vollständig ausgewertet.":"Ergebnis wurde gespeichert.";
+  $("saveStatus").textContent=dbEnabled?"Ergebnis wird gespeichert …":"Lokaler Modus: Supabase ist noch nicht if (dbEnabled) {
+  const name = $("studentName").value.trim().slice(0, 40) || "anonym";
+
+  const { data, error } = await db
+    .from("quiz_results")
+    .insert({
+      student_label: name,
+      score: score,
+      total: quiz.length,
+      percentage: pct,
+      topic_results: topicStats
+    })
+    .select();
+
+  if (error) {
+    console.error("Supabase-Fehler:", error);
+
+    $("saveStatus").textContent =
+      "Supabase-Fehler: " + error.message;
+  } else {
+    console.log("Gespeichert:", data);
+
+    $("saveStatus").textContent =
+      "Ergebnis wurde gespeichert.";
   }
 }
 
